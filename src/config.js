@@ -47,5 +47,7 @@ export default {
   excludeDrafts: JSON.parse(process.env.EXCLUDE_DRAFTS || 'true'),
   excludePrereleases: JSON.parse(process.env.EXCLUDE_PRERELEASES || 'false'),
   cacheTTL: '2 hours',
-  cacheIgnoreRedirects: true
+  cacheIgnoreRedirects: true,
+  releaseLocationExternal: true,
+  externalURLTagReplace: 'https://-{tag_name}-mac.dmg'
 };

@@ -23,7 +23,10 @@ export async function darwin(req, res) {
     if (!asset) throw new NotFoundError(`No asset found that matches '${config.patterns.darwin.zip}'.`);
 
     let downloadUrl = asset.browser_download_url;
-    if (config.privateRepo) {
+
+    if(config.releaseLocationExternal) {
+      downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+    } else if (config.privateRepo) {
       downloadUrl = await getPublicDownloadUrl(asset.url);
     }
 
@@ -51,7 +54,10 @@ export async function win32_portable(req, res) {
   if (!zipAsset) throw new NotFoundError(`No asset found that matches '${config.patterns.win32.zip}'.`);
 
   let downloadUrl = zipAsset.browser_download_url;
-  if (config.privateRepo) {
+
+  if(config.releaseLocationExternal) {
+    downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+  } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(zipAsset.url);
   }
 
@@ -99,7 +105,10 @@ export async function win32_file(req, res) {
   if (!asset) throw new NotFoundError('Asset not found.');
 
   let downloadUrl = asset.browser_download_url;
-  if (config.privateRepo) {
+
+  if(config.releaseLocationExternal) {
+    downloadUrl = config.externalURLTagReplace.replace('{tag_name}', release.tag_name);
+  } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }
 
@@ -123,7 +132,10 @@ export async function linux(req, res) {
   if (!asset) throw new NotFoundError(`No asset found for pkg '${pkg}' and arch '${arch}'.`);
 
   let downloadUrl = asset.browser_download_url;
-  if (config.privateRepo) {
+
+  if(config.releaseLocationExternal) {
+    downloadUrl = config.externalURLTagReplace.replace('{tag_name}', latestRelease.tag_name);
+  } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }
 

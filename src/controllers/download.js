@@ -45,7 +45,10 @@ export async function latest(req, res) {
   if (!asset) throw new NotFoundError(`No asset found that matches '${pattern}'.`);
 
   let downloadUrl = asset.browser_download_url;
-  if (config.privateRepo) {
+
+  if(config.releaseLocationExternal) {
+    downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+  } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }
 
