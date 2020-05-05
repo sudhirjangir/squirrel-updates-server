@@ -5,7 +5,7 @@ import request from 'request';
 const github = new GitHubApi(config.github.api);
 if (config.github.token) {
   github.authenticate({
-    type: 'oauth',
+    type: 'token',
     token: config.github.token
   });
 }

@@ -4,24 +4,26 @@ export default {
   github: {
     token: process.env.GITHUB_TOKEN,
     api: {
+      debug: true,
+      protocol: "https",
       version: '3.0.0',
       headers: {
-        'user-agent': 'Aluxian/squirrel-updates-server'
+        'user-agent': 'ZB-io/squirrel-updates-server'
       },
-      host: process.env.GITHUB_HOST,
-      pathPrefix: process.env.GITHUB_PATH_PREFIX
+      host: process.env.GITHUB_HOST || 'api.github.com',
+      pathPrefix: process.env.GITHUB_PATH_PREFIX || ''
     }
   },
   sentry: {
     dsn: process.env.SENTRY_DSN
   },
-  user: process.env.REPO_OWNER || 'Aluxian',
-  repo: process.env.REPO_NAME || 'Whatsie',
+  user: process.env.REPO_OWNER || 'ZB-io',
+  repo: process.env.REPO_NAME || 'roost-desktop',
   privateRepo: process.env.UPDATES_PRIVATE_REPO || false,
   patterns: {
     darwin: {
-      dmg: /-osx\.dmg/,
-      zip: /-osx\.zip/
+      dmg: /-mac\.dmg/,
+      zip: /-mac\.zip/
     },
     win32: {
       installer: /-win32-setup\.exe/,
