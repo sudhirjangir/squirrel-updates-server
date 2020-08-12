@@ -25,7 +25,7 @@ export async function darwin(req, res) {
     let downloadUrl = asset.browser_download_url;
 
     if(config.releaseLocationExternal) {
-      downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+      downloadUrl = config.externalURLPrefixForAssetNames + asset.name;
     } else if (config.privateRepo) {
       downloadUrl = await getPublicDownloadUrl(asset.url);
     }
@@ -56,7 +56,7 @@ export async function win32_portable(req, res) {
   let downloadUrl = zipAsset.browser_download_url;
 
   if(config.releaseLocationExternal) {
-    downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+    downloadUrl = config.externalURLPrefixForAssetNames + zipAsset.name;
   } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(zipAsset.url);
   }
@@ -107,7 +107,7 @@ export async function win32_file(req, res) {
   let downloadUrl = asset.browser_download_url;
 
   if(config.releaseLocationExternal) {
-    downloadUrl = config.externalURLTagReplace.replace('{tag_name}', release.tag_name);
+    downloadUrl = config.externalURLPrefixForAssetNames + asset.name;
   } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }
@@ -134,7 +134,7 @@ export async function linux(req, res) {
   let downloadUrl = asset.browser_download_url;
 
   if(config.releaseLocationExternal) {
-    downloadUrl = config.externalURLTagReplace.replace('{tag_name}', latestRelease.tag_name);
+    downloadUrl = config.externalURLPrefixForAssetNames + asset.name;
   } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }

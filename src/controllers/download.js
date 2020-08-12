@@ -47,7 +47,7 @@ export async function latest(req, res) {
   let downloadUrl = asset.browser_download_url;
 
   if(config.releaseLocationExternal) {
-    downloadUrl = config.externalURLTagReplace.replace('{tag_name}',latestRelease.tag_name);
+    downloadUrl = config.externalURLPrefixForAssetNames + asset.name;
   } else if (config.privateRepo) {
     downloadUrl = await getPublicDownloadUrl(asset.url);
   }
