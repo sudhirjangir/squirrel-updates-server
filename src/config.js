@@ -2,13 +2,13 @@ export default {
   port: process.env.UPDATES_PORT || process.env.PORT || 3000,
   host: process.env.UPDATES_HOST || '0.0.0.0',
   github: {
-    token: process.env.GITHUB_TOKEN,
+    token: process.env.GITHUB_TOKEN || '',
     api: {
       debug: true,
       protocol: "https",
       version: '3.0.0',
       headers: {
-        'user-agent': 'ZB-io/squirrel-updates-server'
+        'user-agent': 'org_name/squirrel-updates-server'
       },
       host: process.env.GITHUB_HOST || 'api.github.com',
       pathPrefix: process.env.GITHUB_PATH_PREFIX || ''
@@ -17,8 +17,8 @@ export default {
   sentry: {
     dsn: process.env.SENTRY_DSN
   },
-  user: process.env.REPO_OWNER || 'ZB-io',
-  repo: process.env.REPO_NAME || 'roost-desktop',
+  user: process.env.REPO_OWNER || 'org_name',
+  repo: process.env.REPO_NAME || 'repo',
   privateRepo: process.env.UPDATES_PRIVATE_REPO || false,
   patterns: {
     darwin: {
@@ -26,8 +26,8 @@ export default {
       zip: /-mac\.zip/
     },
     win32: {
-      installer: /-win32-setup\.exe/,
-      zip: /-win32-portable\.zip/
+      installer: /-setup\.exe/,
+      zip: /-windows\.zip/
     },
     linux: {
       deb: {
@@ -46,8 +46,8 @@ export default {
   downloadsCountOffset: parseInt(process.env.DOWNLOADS_COUNT_OFFSET || '0') || 0,
   excludeDrafts: JSON.parse(process.env.EXCLUDE_DRAFTS || 'true'),
   excludePrereleases: JSON.parse(process.env.EXCLUDE_PRERELEASES || 'false'),
-  cacheTTL: '2 hours',
+  cacheTTL: '2 minutes',
   cacheIgnoreRedirects: true,
-  releaseLocationExternal: true,
-  externalURLTagReplace: 'https://-{tag_name}-mac.dmg'
+  releaseLocationExternal: false,
+  externalURLPrefixForAssetNames: ''
 };
